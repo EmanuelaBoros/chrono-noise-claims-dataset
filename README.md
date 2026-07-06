@@ -110,6 +110,99 @@ This creates placeholder examples without calling the API.
 
 ---
 
+## Build the claims dataset
+
+Example run for 20 examples:
+
+```bash
+mkdir -p outputs
+export OPENAI_API_KEY="sk-..."
+
+python build_claims_dataset.py \
+  --input-jsonl ../europeana-post-correct-data/outputs/chronocorrect_europeana_fr_test.jsonl \
+  --output-jsonl outputs/chrononoise_claims_fr.jsonl \
+  --target-total-examples 20 \
+  --evidence-mode both \
+  --model-generation gpt-5-mini \
+  --model-verification gpt-5-mini \
+  --resume \
+  --verbose
+```
+
+The `--resume` flag skips examples already present in the output JSONL.
+
+The `--target-total-examples` flag means: continue until the output JSONL contains this many valid examples in total.
+
+For example, if 20 examples already exist and you run:
+
+```bash
+--target-total-examples 100
+```
+
+then the script writes 80 new examples.
+
+---
+
+## Evidence modes
+
+The script supports three evidence modes:
+
+```bash
+--evidence-mode ocr
+--evidence-mode corrected
+--evidence-mode both
+```
+
+These modes allow comparison between LLM behavior on:
+
+1. noisy OCR only
+2. corrected text only
+3. OCR and corrected text together
+
+This is useful for analyzing whether OCR correction improves factual grounding or sometimes increases overconfident unsupported claims.
+
+---
+
+## Output format
+
+Each output record contains:
+
+```json
+{
+  "id": "chrononoise_claims_both_...",
+  "source_dataset": "ChronoCorrect-Europeana",
+  "source_record_id": "...",
+  "language": "fr",
+  "title": "...",
+  "publication_date": "...",
+  "evidence_mode": "both",
+  "ocr_text": "...",
+  "corrected_text": "...",
+  "evidence_context": "...",
+  "llm_output": "...",
+  "claims": [...],
+  "claim_verifications": [...],
+  "global_label": "mostly_supported",
+  "global_risk_summary": "...",
+  "source_metadata": {...},
+  "input_record": {...}
+}
+```
+
+A claim verification item looks like:
+
+```json
+{
+  "claim_id": "c1",
+  "claim_text": "The meeting took place in Paris.",
+  "support_label": "SUPPORTED",
+  "evidence_span": "...",
+  "explanation": "The claim is directly stated in the corrected paragraph.",
+  "risk_types": ["NONE"],
+  "confidence": "high"
+}
+```
+
 
 
 
