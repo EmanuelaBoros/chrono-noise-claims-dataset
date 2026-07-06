@@ -66,5 +66,50 @@ Risk types include:
 
 ---
 
+---
+
+## Input format
+
+The builder expects a JSONL file produced by a ChronoCorrect-Europeana-style pipeline.
+
+Each input record should contain at least:
+
+```json
+{
+  "id": "chronocorrect_europeana_fr_...",
+  "language": "fr",
+  "title": "...",
+  "date": "...",
+  "ocr_text": "...",
+  "corrected_text": "...",
+  "source_metadata": {...}
+}
+```
+
+The script is also compatible with flattened fields such as `source_metadata_json`.
+
+---
+
+## Quick no-API test
+
+Run a small dry test first:
+
+```bash
+mkdir -p outputs
+
+python build_claims_dataset.py \
+  --input-jsonl ../europeana-post-correct-data/outputs/chronocorrect_europeana_fr_test.jsonl \
+  --output-jsonl outputs/test_no_api_claims.jsonl \
+  --max-examples 5 \
+  --no-api \
+  --resume \
+  --verbose
+```
+
+This creates placeholder examples without calling the API.
+
+---
+
+
 
 
