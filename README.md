@@ -8,6 +8,8 @@ The project is designed around one question:
 
 The repository currently contains scripts to build a silver claim-verification dataset from ChronoCorrect-Europeana-style JSONL files.
 
+📦 **Dataset on Hugging Face:** [EmanuelaBoros/chrononoise-claims-fr](https://huggingface.co/datasets/EmanuelaBoros/chrononoise-claims-fr)
+
 ---
 
 Historical newspaper OCR often contains character errors, broken words, missing accents, layout noise, and entity distortions. When LLMs are asked to summarize or interpret such text, they may produce fluent historical claims that sound plausible but are not actually supported by the evidence.
