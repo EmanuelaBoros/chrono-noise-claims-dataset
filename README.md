@@ -29,4 +29,42 @@ ChronoNoise-Claims is intended to support research on:
 
 ---
 
+## Dataset idea
+
+Each example starts from a historical newspaper paragraph with:
+
+- original OCR text
+- corrected text
+- metadata such as language, title, and publication date
+
+The pipeline asks an LLM to produce a short historical summary and a set of atomic claims. A second verification step then labels each claim according to whether it is supported by the provided evidence.
+
+Example labels include:
+
+- `SUPPORTED`
+- `INFERRED_SUPPORTED`
+- `PARTIALLY_SUPPORTED`
+- `UNSUPPORTED`
+- `CONTRADICTED`
+- `UNCERTAIN_DUE_TO_OCR`
+- `TEMPORALLY_INVALID`
+- `ENTITY_DRIFT`
+- `OVER_SPECIFIED`
+
+Risk types include:
+
+- `OCR_AMBIGUITY`
+- `ENTITY_OVERLINKING`
+- `LOCATION_NORMALIZATION`
+- `RELATIVE_DATE_RESOLUTION`
+- `NUMBER_DISTORTION`
+- `TITLE_OR_ROLE_INFERENCE`
+- `EVENT_OVERINTERPRETATION`
+- `CAUSE_EFFECT_HALLUCINATION`
+- `HISTORICAL_PRIOR_HALLUCINATION`
+- `UNSUPPORTED_SPECIFICATION`
+
+---
+
+
 
