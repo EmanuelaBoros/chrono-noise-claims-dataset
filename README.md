@@ -203,6 +203,90 @@ A claim verification item looks like:
 }
 ```
 
+---
+
+## How to use it?
+
+### Claim verification
+
+Input:
+
+```text
+historical paragraph + generated claim
+```
+
+Output:
+
+```text
+support label + evidence span + risk type
+```
+
+### OCR-sensitive hallucination detection
+
+Input:
+
+```text
+noisy OCR + LLM summary
+```
+
+Output:
+
+```text
+unsupported or risky claims
+```
+
+### Evidence selection
+
+Input:
+
+```text
+paragraph + claim
+```
+
+Output:
+
+```text
+evidence span supporting or contradicting the claim
+```
+
+### Temporal grounding
+
+Input:
+
+```text
+publication date + historical text + relative temporal expression
+```
+
+Output:
+
+```text
+supported temporal interpretation or temporal-risk label
+```
+
+---
+
+## Limitations
+
+The current dataset is silver. 
+
+---
+
+## Citation
+
+If you use this repository or the derived dataset, please cite the original source dataset and this derived dataset/repository.
+
+Suggested citation placeholder:
+
+```bibtex
+@dataset{boros_chrononoise_claims,
+  title = {ChronoNoise-Claims: Evidence-Grounded Claim Verification over Noisy Historical Newspaper Text},
+  author = {Boros, Emanuela},
+  year = {2026},
+  publisher = {Hugging Face / GitHub},
+  note = {Silver dataset construction pipeline for historical OCR-sensitive claim verification}
+}
+```
+
 
 
 
